@@ -1,0 +1,17 @@
+<!-- In recipe-detail.component.html -->
+<div *ngIf="recipe$ | async as recipe">
+    <h2>{{ recipe.title }}</h2>
+    <img [src]="recipe.imageUrl" alt="Image of {{ recipe.title }}">
+    <h3>Ingredients:</h3>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+    </ul>
+    <h3>Steps:</h3>
+    <p *ngFor="let step of recipe.steps">{{ step }}</p>
+    <h3>Nutritional Facts:</h3>
+    <p>Calories: {{ recipe.nutritionalFacts.calories }}</p>
+    <p>Protein: {{ recipe.nutritionalFacts.protein }}</p>
+    <p>Fat: {{ recipe.nutritionalFacts.fat }}</p>
+    <p>Carbs: {{ recipe.nutritionalFacts.carbs }}</p>
+  </div>
+  

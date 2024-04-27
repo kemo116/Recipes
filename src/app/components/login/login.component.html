@@ -1,0 +1,12 @@
+<div class="signup-container" *ngIf="!isSignedIn"> 
+    <h2>Login</h2>
+    <div class="signup-form">
+        <input type="text" placeholder="Email" #email>
+        <input type="password" placeholder="Password" #password>
+        <button (click)="onSignin(email.value, password.value)">Login</button>
+    </div>
+    <div class="login-link">
+        <span (click)="navigateToSignUp()"> Don't have an account? <a>Sign Up</a> </span>
+    </div>
+</div>
+<app-home *ngIf="isSignedIn" (isLogout)="handlelogout() "></app-home>

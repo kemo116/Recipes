@@ -1,0 +1,54 @@
+<div class="form-container text-center" *ngIf="user$ | async as user">
+    <h1>Update Profile</h1>
+    <div class="profile-image">
+      <img
+        width="120"
+        height="120"
+        class="profile-img"
+        [src]="user.photoURL ?? '/assets/images/image-placeholder.png'"
+      />
+      <button class="edit-button" (click)="inputField.click()">Edit</button>
+    </div>
+    <input #inputField hidden type="file" (change)="uploadFile()" />
+  
+    <form class="profile-form" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+      <div class="row">
+        <input
+          type="text"
+          formControlName="firstName"
+          placeholder="First Name"
+          class="form-input"
+        />
+        <input
+          type="text"
+          formControlName="lastName"
+          placeholder="Last Name"
+          class="form-input"
+        />
+      </div>
+  
+      <div class="row">
+        <input
+          type="text"
+          formControlName="displayName"
+          placeholder="Display Name"
+          class="form-input"
+        />
+        <input
+          type="number"
+          formControlName="phone"
+          placeholder="Phone"
+          class="form-input"
+        />
+      </div>
+      <input
+        type="text"
+        formControlName="address"
+        placeholder="Address"
+        class="form-input"
+      />
+  
+      <button type="submit" class="save-button">Save</button>
+    </form>
+  </div>
+  

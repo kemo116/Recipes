@@ -1,0 +1,51 @@
+.form-container {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .profile-image {
+    position: relative;
+    margin: 20px auto;
+  }
+  
+  .profile-img {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+  }
+  
+  .edit-button {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .profile-form .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .form-input {
+    padding: 8px;
+    width: calc(50% - 10px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

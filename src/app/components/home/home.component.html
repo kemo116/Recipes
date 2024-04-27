@@ -1,0 +1,26 @@
+
+<button class="btn btn-primary" (click)="logout()">Logout</button>
+<button class="btn btn-primary" ><a routerLink="/profile">My Profile</a></button>
+<input type="text" [(ngModel)]="filterText" placeholder="Search recipes" class="form-control mb-3">
+
+<div  [style.background-image]="'url(' + bgImageUrl + ')'" class="recipe-background">
+
+
+<!-- Bootstrap CSS included in a better place, usually in the head of your index.html -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- Recipes container -->
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let recipe of recipes | filter:filterText:'title'" (click)="onSelect(recipe)">
+          <div class="card">
+            <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">{{ recipe.description | slice:0:100 }}...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>

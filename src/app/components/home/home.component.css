@@ -1,0 +1,35 @@
+.recipes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.recipe-background {
+    height: 100vh; /* Full height */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the entire container */
+  }
+.recipe-card {
+    flex: 0 0 22%; /* Adjusts to fit 4 items per row, accounting for some margin */
+    margin: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.recipe-card:hover {
+    transform: scale(1.05); /* Simple scale effect on hover */
+}
+
+.recipe-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .recipe-card {
+        flex: 0 0 48%; /* Adjusts to 2 items per row on smaller screens */
+    }
+}

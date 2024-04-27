@@ -1,0 +1,74 @@
+html, body {
+    height: 100%;   /* Ensure full height */
+    margin: 0;      /* Remove default margin */
+    padding: 0;     /* Remove default padding */
+    overflow: hidden; /* Optional: prevents scrollbars */
+}
+app-root {
+    height: 100%;
+    width: 100%;
+}
+h2{
+    color:bisque
+}
+.signup-container {
+    text-align: center;
+    background-image: url("E:/Task/src/assets/1324977 (1).jpeg"); /* Update with your image path */
+            background-size: cover; /* Cover the entire container */
+            background-position: center; /* Center the background image */
+            padding: 20px;
+            box-sizing: border-box;
+            width: 100%; /* Optional: you can set a specific width */
+            height: 97vh; /* Full height of the viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+}
+
+.signup-form {
+    border: 2px solid #ccc;
+    border-radius: 10%;
+    padding: 20px;
+    width: 250px;
+    margin: 0 auto;
+    background-color: black;
+    height: 250px;
+}
+
+.signup-form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.signup-form button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background-color: #45a049;
+}
+
+.login-link {
+    margin-top: 20px;
+    color: bisque;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
