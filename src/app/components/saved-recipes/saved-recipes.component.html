@@ -1,0 +1,13 @@
+<h2>Your Saved Recipes</h2>
+
+<div *ngIf="savedRecipes.length > 0; else noSavedRecipes">
+  <ul>
+    <li *ngFor="let recipe of savedRecipes">
+      {{ recipe.title }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #noSavedRecipes>
+  <p>No recipes saved yet.</p>
+</ng-template>

@@ -1,10 +1,12 @@
 export interface ProfileUser {
-    uid: string;
+    id: string;
     email?: string;
     username?:string;
-    displayName?: string;
-    photoURL?: string;
-    followerIds?: string[];
-    followingIds?: string[];
-    recipes?:string[];
+    followers?: string[];
+    following?: string[];
+    postedRecipes?:string[];
+    profilePicture?:string;
+    bio?:string;
+    SavedRecipes:string[];
+
 }

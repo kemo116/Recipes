@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {AngularFireModule} from '@angular/fire/compat'
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FirebaseService } from './services/firebase.service';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
@@ -12,8 +9,22 @@ import { LoginComponent } from './components/login/login.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-
-
+import { MaterialModule } from './Material.Module';
+import { MenuComponent } from './components/menu/menu.component';
+import { PostRecipeComponent } from './components/post-recipe/post-recipe.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { CommentPopupComponent } from './components/comment-popup/comment-popup.component';
+import { HttpClientModule } from '@angular/common/http';
+import {provideFirestore,getFirestore} from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from './environment';
+import { initializeApp } from '@angular/fire/app/firebase';
+import { FollowersDialogComponent } from './components/followers-dialog/followers-dialog.component';
+import { SavedRecipesComponent } from './components/saved-recipes/saved-recipes.component';
+import { PublicProfileComponent } from './components/public-profile/public-profile.component';
+import { ReviewsPopupComponent } from './components/reviews-popup/reviews-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,24 +34,30 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     LoginComponent,
     FilterPipe,
     UserProfileComponent,
-    
-    
+    MenuComponent,
+    PostRecipeComponent,
+    CommentPopupComponent,
+    FollowersDialogComponent,
+    SavedRecipesComponent,
+    PublicProfileComponent,
+    ReviewsPopupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule ,
-    ReactiveFormsModule ,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyBIWbgJ3laZUwpSWrrnGcRs5squ4aaZ7gI",
-      authDomain: "task-c5d3d.firebaseapp.com",
-      projectId: "task-c5d3d",
-      storageBucket: "task-c5d3d.appspot.com",
-      messagingSenderId: "841408636463",
-      appId: "1:841408636463:web:da0339288c0e33f97c48da"
-    }),
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase
+    AngularFireAuthModule, // Import AngularFireAuthModule
+    AngularFirestoreModule,
+    // provideFirestore(() => initializeApp(environment.firebaseConfig)).ngModule,
+    provideFirestore(() => getFirestore())
   ],
-  providers: [FirebaseService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

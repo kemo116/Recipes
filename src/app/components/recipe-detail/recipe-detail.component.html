@@ -1,4 +1,5 @@
 <!-- In recipe-detail.component.html -->
+<app-menu *ngIf="showMenu"></app-menu>
 <div *ngIf="recipe$ | async as recipe">
     <h2>{{ recipe.title }}</h2>
     <img [src]="recipe.imageUrl" alt="Image of {{ recipe.title }}">
@@ -13,5 +14,6 @@
     <p>Protein: {{ recipe.nutritionalFacts.protein }}</p>
     <p>Fat: {{ recipe.nutritionalFacts.fat }}</p>
     <p>Carbs: {{ recipe.nutritionalFacts.carbs }}</p>
-  </div>
+    
+</div>
   

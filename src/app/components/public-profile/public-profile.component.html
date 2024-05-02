@@ -1,0 +1,22 @@
+<div *ngIf="user">
+    <h1>{{ user.username }}</h1>
+    <p>Email: {{ user.email }}</p>
+    <!-- Other user details -->
+    <button (click)="toggleFollowUser(user)">
+      {{ isFollowing(user) ? 'Unfollow' : 'Follow' }}
+    </button>
+    <p>Followers: {{ followerCount }}</p>
+    <p>Following: {{ followingCount }}</p>
+  
+    <h2>Posted Recipes</h2>
+    <ul>
+      <li *ngFor="let recipe of postedRecipes">
+        <div>
+          <h3>{{ recipe.title }}</h3>
+          <p>{{ recipe.description }}</p>
+          <!-- Add other recipe details as needed -->
+        </div>
+      </li>
+    </ul>
+  </div>
+  

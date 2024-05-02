@@ -1,0 +1,52 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+   margin-right:20px ;
+}
+.menu-container {
+    position: relative;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+  }
+  
+  .menu-open {
+    display: block;
+    transform: translateX(0%);
+  }
+  
+  .menu-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-item {
+    padding: 8px 12px;
+    display: block;
+    text-align: left;
+    color:white;
+  }
+  
+  .menu-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .menu-container:hover .menu {
+    display: block;
+  }
+  

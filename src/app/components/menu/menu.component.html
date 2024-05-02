@@ -1,0 +1,17 @@
+<mat-toolbar color="warn" class="mat-elevation-z8">
+    <div class="menu-container" #menuButton>
+        <button mat-icon-button (click)="toggleMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class="menu" *ngIf="menuOpen">
+            <button mat-menu-item routerLink="/saved">Saved Recipes</button>
+        </div>
+    </div>
+    <span>Let Him Kok</span>
+    <span class="example-spacer"></span>
+    <button routerLink="/home" mat-button>Home</button>
+    <button routerLink="/post" mat-button>Post A recipe</button>
+    <button mat-button>Discover</button>
+    <button mat-button>My Profile</button>
+    <button mat-raised-button color="accent">Logout</button>
+</mat-toolbar>
