@@ -171,8 +171,6 @@ export class HomeComponent implements OnInit{
         console.error('Error adding review to Firestore:', error);
       });
   }
-  logout() {
-    this.firebaseService.logout()
-  }
+  
 }
 

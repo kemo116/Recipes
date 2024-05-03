@@ -15,7 +15,7 @@ export class PublicProfileComponent implements OnInit {
   postedRecipes: Recipe[] = [];
   followerCount: number = 0;
   followingCount: number = 0;
-
+  showMenu: boolean = true;
   constructor(private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {

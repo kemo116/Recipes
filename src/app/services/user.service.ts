@@ -82,4 +82,5 @@ export class UserService {
         map((user: any) => user.following ? user.following.length : 0)
       );
   }
+  
 }

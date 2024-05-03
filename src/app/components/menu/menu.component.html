@@ -11,7 +11,8 @@
     <span class="example-spacer"></span>
     <button routerLink="/home" mat-button>Home</button>
     <button routerLink="/post" mat-button>Post A recipe</button>
+    <button routerLink="/plan" mat-button>Plan meals</button>
     <button mat-button>Discover</button>
     <button mat-button>My Profile</button>
-    <button mat-raised-button color="accent">Logout</button>
+    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
 </mat-toolbar>

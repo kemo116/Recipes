@@ -12,6 +12,7 @@ export class SavedRecipesComponent implements OnInit {
   savedRecipes: any[] = [];
   currentUserId: string | null = null;
   recipe$: Observable<any> = new Observable();
+  showMenu: boolean = true;
 
   constructor(
     private recipeSavingService: RecipeSavingService,

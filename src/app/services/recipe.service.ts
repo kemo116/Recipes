@@ -25,6 +25,13 @@ export class RecipeService {
     const recipeRef = this.firestore.collection('recipes').doc(recipeId);
     return recipeRef.update({ ratings: newRating });
   }
+  getRecipesByMealType(mealType: string): Observable<any[]> {
+    return this.firestore.collection('recipes', ref => ref.where('mealType', '==', mealType)).valueChanges({ idField: 'id' });
+  }
+  getRecipesByMealTypeAndUser(mealType: string, userId: string): Observable<any[]> {
+    return this.firestore.collection('recipes', ref => ref.where('mealType', '==', mealType).where('userId', '==', userId)).valueChanges({ idField: 'id' });
+  }
+  
   
 
 }

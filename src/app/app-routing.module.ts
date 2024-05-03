@@ -8,6 +8,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { PostRecipeComponent } from './components/post-recipe/post-recipe.component';
 import { SavedRecipesComponent } from './components/saved-recipes/saved-recipes.component';
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
+import { MealPlanningComponent } from './components/meal-planning/meal-planning.component';
 
 const routes: Routes = [
   {path:'', component:  SignupComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'post', component: PostRecipeComponent },
   {path: 'saved',component:SavedRecipesComponent},
   { path: 'profile', component: UserProfileComponent },
-  { path: 'user/:username', component:PublicProfileComponent }
+  { path: 'user/:username', component:PublicProfileComponent },
+  {path: 'plan',component:MealPlanningComponent}
 ];
 
 @NgModule({

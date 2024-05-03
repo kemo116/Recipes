@@ -25,6 +25,7 @@ import { FollowersDialogComponent } from './components/followers-dialog/follower
 import { SavedRecipesComponent } from './components/saved-recipes/saved-recipes.component';
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
 import { ReviewsPopupComponent } from './components/reviews-popup/reviews-popup.component';
+import { MealPlanningComponent } from './components/meal-planning/meal-planning.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { ReviewsPopupComponent } from './components/reviews-popup/reviews-popup.
     SavedRecipesComponent,
     PublicProfileComponent,
     ReviewsPopupComponent,
+    MealPlanningComponent,
   ],
   imports: [
     BrowserModule,

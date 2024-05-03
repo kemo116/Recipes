@@ -1,6 +1,4 @@
 <app-menu *ngIf="showMenu"></app-menu>
-<button class="btn btn-primary" (click)="logout()">Logout</button>
-<button class="btn btn-primary" ><a routerLink="/profile">My Profile</a></button>
 <input type="text" [(ngModel)]="filterText" placeholder="Search recipes" class="form-control mb-3">
 
 <div  [style.background-image]="'url(' + bgImageUrl + ')'" class="recipe-background">
