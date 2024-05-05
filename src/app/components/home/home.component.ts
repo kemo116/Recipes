@@ -9,9 +9,10 @@ import { CommentPopupComponent } from '../comment-popup/comment-popup.component'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RecipeSavingService } from '../../services/recipe-saving.service';
+// import { RecipeSavingService } from '../../services/recipe-saving.service';
 import firebase from 'firebase/compat';
 import { ReviewsPopupComponent } from '../reviews-popup/reviews-popup.component';
+import { Recipe } from '../../models/recipe';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit{
     private storage: AngularFireStorage,
     private dialog: MatDialog,
     private firestore:AngularFirestore,
-    private recipeSavingService: RecipeSavingService
+    // private recipeSavingService: RecipeSavingService
     
   ) { }
 
@@ -48,6 +49,22 @@ export class HomeComponent implements OnInit{
       this.bgImageUrl = url;
     });
     this.currentUserId = this.firebaseService.getCurrentUserId();
+    this.recipeService.getRecipes().subscribe(allRecipes => {
+      this.currentUserId = this.firebaseService.getCurrentUserId();
+      if (this.currentUserId) {
+        this.firebaseService.getUserData(this.currentUserId).then(user => {
+          const savedRecipesTitles = user && user.savedRecipes ? user.savedRecipes.map((r: { title: any; }) => r.title) : [];
+          this.recipes = allRecipes.map(recipe => {
+            recipe.saved = savedRecipesTitles.includes(recipe.title); // Set saved state
+            return recipe;
+          });
+        }).catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+      } else {
+        this.recipes = allRecipes; // Load recipes normally if no user or not logged in
+      }
+    });
   }
   showDetails(recipe: any): void {
     this.router.navigate(['/recipe', recipe.id]);
@@ -55,34 +72,40 @@ export class HomeComponent implements OnInit{
   // Function to toggle recipe saved state
   toggleRecipeSavedState(recipe: any): void {
     if (!this.currentUserId) {
-        console.error('Current user ID is null.');
+        console.error("User must be logged in to toggle saved recipes.");
         return;
     }
 
-    const userRef = this.firestore.collection('users').doc(this.currentUserId);
-    userRef.get().toPromise().then(doc => {
-        const savedRecipes = (doc?.data() as { SavedRecipes?: string[] })?.SavedRecipes || [];
-        const recipeIndex = savedRecipes.indexOf(`/recipes/${recipe.id}`);
+    const newState = !recipe.saved; // Toggle the state
 
-        if (recipeIndex === -1) {
-            // Recipe not in saved list, add it
-            savedRecipes.push(`/recipes/${recipe.id}`);
+    this.firebaseService.getUserData(this.currentUserId).then(user => {
+        let savedRecipes = user.savedRecipes || [];
+        if (newState) {
+            // Add to saved recipes, ensure to include the 'id'
+            savedRecipes.push({
+                id: recipe.id, // Save the recipe ID here
+                title: recipe.title,
+                description: recipe.description,
+                rating: recipe.ratings,
+                imageUrl: recipe.imageUrl
+            });
         } else {
-            // Recipe already in saved list, remove it
-            savedRecipes.splice(recipeIndex, 1);
+            // Remove from saved recipes
+            savedRecipes = savedRecipes.filter((r: { id: any; }) => r.id !== recipe.id);
         }
 
-        // Update the user document with the modified saved recipes list
-        return userRef.update({ SavedRecipes: savedRecipes });
-    }).then(() => {
-        console.log('Recipe saved state toggled successfully.');
-        recipe.saved = !recipe.saved; // Toggle saved state locally
+        this.firebaseService.updateUserSavedRecipes(this.currentUserId!, savedRecipes).then(() => {
+            recipe.saved = newState; // Update local state
+            console.log('Saved recipes updated successfully.');
+        }).catch(error => {
+            console.error('Error updating saved recipes:', error);
+        });
     }).catch(error => {
-        console.error('Error toggling recipe saved state:', error);
+        console.error('Error fetching user data:', error);
     });
 }
 
-
+  
 
 
 
@@ -123,28 +146,37 @@ export class HomeComponent implements OnInit{
     this.router.navigate(['/user', username]);
   }
   rateRecipe(recipe: any, rating: number): void {
-    const currentRatings = recipe.ratings || []; // Existing ratings or empty array if not rated yet
-    const newRatings = [...currentRatings, rating]; // Add the new rating to the existing ratings
-    const newRating = newRatings.reduce((sum, rating) => sum + rating, 0) / newRatings.length; // Calculate the average rating
-  
-    // Update the rating in Firestore
-    this.recipeService.updateRecipeRating(recipe.id, newRating)
-      .then(() => {
-        console.log('Recipe rated successfully.');
-        // Optionally, update the local recipe object with the new rating
-        recipe.ratings = newRatings;
-      })
-      .catch(error => {
-        console.error('Error rating recipe:', error);
-      });
-  }
-  
-  calculateAverageRating(recipe: any): number {
-    if (!recipe || recipe.ratings === undefined) {
-      return 0; // Return 0 if ratings are undefined
+    const currentUserId = this.firebaseService.getCurrentUserId();
+    if (!currentUserId) {
+        console.error("User must be logged in to rate recipes.");
+        return;
     }
-    return recipe.ratings; // Return the overall rating as the average
-  }
+
+    // Define the type for ratingsUpdate to allow dynamic keys
+    const ratingsUpdate: { [key: string]: any } = {};
+    ratingsUpdate[`ratings.${currentUserId}`] = rating; // Construct an object path for updating specific user's rating
+
+    this.firestore.collection('recipes').doc(recipe.id).update(ratingsUpdate)
+        .then(() => {
+            console.log('Recipe rated successfully.');
+            // Ensure recipe.ratings is an object before assigning to avoid runtime errors
+            if (!recipe.ratings) recipe.ratings = {};
+            recipe.ratings[currentUserId] = rating; // Update the local state to reflect the new rating
+        })
+        .catch(error => {
+            console.error('Error rating recipe:', error);
+        });
+}
+
+  
+calculateAverageRating(recipe: Recipe): number {
+  const ratings = recipe.ratings;
+  const total = Object.values(ratings).reduce((acc: number, curr: number) => acc + curr, 0);
+  const count = Object.keys(ratings).length;
+  return count > 0 ? total / count : 0;
+}
+
+
   openReviewPopup(recipe: any): void {
     const dialogRef = this.dialog.open(ReviewsPopupComponent, {
       width: '500px',

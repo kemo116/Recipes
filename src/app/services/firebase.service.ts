@@ -64,7 +64,27 @@ export class FirebaseService {
         console.error("Error signing up:", error);
       });
   }
-
+  getUserData(userId: string): Promise<any> {
+    return this.firestore.collection('users').doc(userId).get().toPromise().then(doc => doc!.data());
+  }
+  
+  // Method to update a user's saved recipes
+  updateUserSavedRecipes(userId: string, recipes: any[]): Promise<void> {
+    const userRef = this.firestore.collection('users').doc(userId);
+    return userRef.update({
+      savedRecipes: recipes
+    });
+  }
+  updateUserMealPlan(userId: string, day: string, mealType: string, recipe: any): Promise<void> {
+    const userRef = this.firestore.collection('users').doc(userId);
+    return userRef.set({
+      [`mealPlan.${day}.${mealType}`]: {
+        recipeId: recipe.id,
+        title: recipe.title
+      }
+    }, { merge: true });
+  }
+  
   logout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');

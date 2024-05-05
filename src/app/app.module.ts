@@ -26,6 +26,10 @@ import { SavedRecipesComponent } from './components/saved-recipes/saved-recipes.
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
 import { ReviewsPopupComponent } from './components/reviews-popup/reviews-popup.component';
 import { MealPlanningComponent } from './components/meal-planning/meal-planning.component';
+import { RecipeSelectionDialogComponent } from './components/recipe-selection-dialog/recipe-selection-dialog.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +46,11 @@ import { MealPlanningComponent } from './components/meal-planning/meal-planning.
     SavedRecipesComponent,
     PublicProfileComponent,
     ReviewsPopupComponent,
+    RecipeSelectionDialogComponent,
     MealPlanningComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -54,10 +60,14 @@ import { MealPlanningComponent } from './components/meal-planning/meal-planning.
     AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase
     AngularFireAuthModule, // Import AngularFireAuthModule
     AngularFirestoreModule,
+    MatListModule  ,
     // provideFirestore(() => initializeApp(environment.firebaseConfig)).ngModule,
     provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

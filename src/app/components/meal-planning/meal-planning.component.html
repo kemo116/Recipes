@@ -7,14 +7,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <div class="container">
-    <div class="days-row">
-      <div class="day" *ngFor="let day of days" (click)="selectDay(day)" [ngClass]="{'selected': selectedDay === day}">
-        {{ day }}
-      </div>
-  </div>
-  <div class="meals-row">
-    <button (click)="addMeal('Breakfast')"><i class="fas fa-plus"></i> Add Breakfast</button>
-    <button (click)="addMeal('Lunch')"><i class="fas fa-plus"></i> Add Lunch</button>
-    <button (click)="addMeal('Dinner')"><i class="fas fa-plus"></i> Add Dinner</button>
-  </div>
+  <div class="days-row">
+    <div class="day" *ngFor="let day of days" (click)="selectDay(day)" 
+         [class.selected]="selectedDay === day">
+      {{ day }}
+    </div>
+</div>
+<div class="meals-row">
+  <button (click)="addMeal('Breakfast')"><i class="fas fa-plus"></i> Add Breakfast</button>
+  <button (click)="addMeal('Lunch')"><i class="fas fa-plus"></i> Add Lunch</button>
+  <button (click)="addMeal('Dinner')"><i class="fas fa-plus"></i> Add Dinner</button>
+</div>
 </div>

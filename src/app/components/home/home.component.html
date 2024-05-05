@@ -30,8 +30,11 @@
           <div>
             <!-- Display star icons for ratings -->
             <button mat-icon-button *ngFor="let star of [1, 2, 3, 4, 5]" (click)="rateRecipe(recipe, star)">
-              <mat-icon>{{ star <= calculateAverageRating(recipe) ? 'star' : 'star_border' }}</mat-icon>
-            </button>
+              <mat-icon>
+                  {{ star <= (recipe.ratings[currentUserId!] || 0) ? 'star' : 'star_border' }}
+              </mat-icon>
+          </button>
+          
           </div>
         </div>
       </div>

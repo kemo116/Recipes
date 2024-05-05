@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { ProfileUser } from '../../models/profile-user';
 import { FirebaseService } from '../../services/firebase.service';
 import { Recipe } from '../../models/recipe';
+import { forkJoin, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-public-profile',
@@ -49,37 +50,44 @@ export class PublicProfileComponent implements OnInit {
   }
 
   isFollowing(user: ProfileUser): boolean {
-    const userId = this.firebaseService.getCurrentUserId();
-    return !!userId && !!user.followers && user.followers.includes(userId);
-  }
+    const currentUserId = this.firebaseService.getCurrentUserId();
+    return user.followers!.includes(currentUserId!);
+}
 
-  toggleFollowUser(user: ProfileUser): void {
-    const userId = this.firebaseService.getCurrentUserId();
-    if (!userId) {
+
+  toggleFollowUser(profileUser: ProfileUser): void {
+    const currentUserId = this.firebaseService.getCurrentUserId();
+    if (!currentUserId) {
       console.error('User not logged in.');
       return;
     }
 
-    if (this.isFollowing(user)) {
-      // Unfollow user
-      // Remove user from current user's followings list
-      const index = user.followers?.indexOf(userId);
-      if (index !== undefined && index !== -1) {
-        user.followers?.splice(index, 1);
-      }
-    } else {
-      // Follow user
-      // Add user to current user's followings list
-      if (!user.followers) {
-        user.followers = [];
-      }
-      user.followers.push(userId);
-     
-    }
+    this.userService.getUserById(currentUserId)
+      .pipe(
+        take(1),  // Take only the first emission
+        switchMap(currentUser => {
+          const isFollowing = this.isFollowing(profileUser);
+          if (isFollowing) {
+            profileUser.followers = profileUser.followers!.filter(id => id !== currentUserId);
+            currentUser.following = currentUser.following.filter((id: any) => id !== profileUser.id);
+          } else {
+            profileUser.followers = (profileUser.followers || []).concat([currentUserId]);
+            currentUser.following = (currentUser.following || []).concat([profileUser.id]);
+          }
 
-    // Update user document in Firestore
-    this.userService.updateUser(user).subscribe(() => {
-      console.log('User follow state updated successfully.');
-    });
-  }
+          return forkJoin({
+            profileUpdate: this.userService.updateUser(profileUser),
+            currentUserUpdate: this.userService.updateUser(currentUser)
+          });
+        })
+      ).subscribe({
+        next: result => {
+          console.log('Users updated successfully', result);
+        },
+        error: err => {
+          console.error('Error updating users', err);
+        }
+      });
+}
+
 }

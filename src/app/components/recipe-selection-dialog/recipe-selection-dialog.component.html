@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Select a recipe</h1>
+<div mat-dialog-content>
+  <mat-list>
+    <mat-list-item *ngFor="let recipe of data.recipes" (click)="onSelectRecipe(recipe)">
+      {{ recipe.title }}
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

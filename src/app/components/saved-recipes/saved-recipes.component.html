@@ -1,14 +1,14 @@
 <app-menu *ngIf="showMenu"></app-menu>
-<h2>Your Saved Recipes</h2>
-
-<div *ngIf="savedRecipes.length > 0; else noSavedRecipes">
-  <ul>
-    <li *ngFor="let recipe of savedRecipes">
-      {{ recipe.title }}
-    </li>
-  </ul>
+<div *ngIf="savedRecipes.length > 0; else noRecipes">
+  <div *ngFor="let recipe of savedRecipes">
+    <h3>{{ recipe.title }}</h3>
+    <img [src]="recipe.imageUrl" alt="Image of {{ recipe.title }}" style="width: 100px; height: 100px;">
+    <p>{{ recipe.description }}</p>
+    <p>Rating: {{ recipe.rating }}</p>
+    <button class="btn btn-outline-primary" (click)="showDetails(recipe)">More Details</button>
+  </div>
 </div>
 
-<ng-template #noSavedRecipes>
-  <p>No recipes saved yet.</p>
+<ng-template #noRecipes>
+  <p>No saved recipes yet.</p>
 </ng-template>

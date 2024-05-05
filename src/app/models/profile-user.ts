@@ -8,5 +8,13 @@ export interface ProfileUser {
     profilePicture?:string;
     bio?:string;
     SavedRecipes:string[];
-
+    mealPlan?: {
+      [day: string]: {
+        [mealType: string]: {
+          title: string;
+          imageUrl: string;
+          description: string;
+        }
+      }
+    };
 }

@@ -7,8 +7,10 @@ export interface Recipe {
     steps:string[];
     username:string;
     requiredTime:string;
-    ratings:number;
+    ratings: { [userId: string]: number };
+
     reviews:string[];
+    mealType:string;
     // Add other fields as needed
   }
   
