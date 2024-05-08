@@ -1,4 +1,5 @@
-<app-menu *ngIf="showMenu"></app-menu>
+<app-menu *ngIf="showMenu" (searchEvent)="filterText = $event"></app-menu>
+
 <div *ngIf="user$ | async as user">
   <h1>{{ user.username }}</h1>
   <p>Email: {{ user.email }}</p>

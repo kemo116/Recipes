@@ -2,7 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { Recipe } from '../models/recipe';
+interface MealEntry {
+  userId: string;
+  title: string;
+}
+interface MealEntries {
+  [key: string]: any[]; // This allows any property names with values as arrays
+}
 
+interface MealData {
+  [mealType: string]: MealEntry[];
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -75,16 +86,46 @@ export class FirebaseService {
       savedRecipes: recipes
     });
   }
-  updateUserMealPlan(userId: string, day: string, mealType: string, recipe: any): Promise<void> {
-    const userRef = this.firestore.collection('users').doc(userId);
-    return userRef.set({
-      [`mealPlan.${day}.${mealType}`]: {
-        recipeId: recipe.id,
-        title: recipe.title
-      }
-    }, { merge: true });
-  }
-  
+  addMealToDay(day: string, mealType: string, recipe: Recipe): Promise<void> {
+    if (!this.currentUserId) {
+        return Promise.reject('No user logged in');
+    }
+
+    const dayRef = this.firestore.collection('mealPlan').doc(day);
+    
+    return dayRef.get().toPromise().then(doc => {
+        const data = doc!.exists ? (doc!.data() as { [key: string]: any[] }) : {};
+        let mealEntries: any[] = Array.isArray(data[mealType]) ? data[mealType] : [];
+
+        let entry = {
+            userId: this.currentUserId,
+            title: recipe.title // Assuming recipe.title is defined
+        };
+
+        // Check if an entry for this user already exists
+        const index = mealEntries.findIndex(meal => meal.userId === this.currentUserId);
+        if (index !== -1) {
+            mealEntries[index] = entry; // Update existing entry
+        } else {
+            mealEntries.push(entry); // Add new entry
+        }
+
+        // Define updateObject using the MealEntries type
+        let updateObject: MealEntries = {};
+        updateObject[mealType] = mealEntries;
+
+        if (doc!.exists) {
+            return dayRef.update(updateObject);
+        } else {
+            return dayRef.set(updateObject);
+        }
+    }).catch(error => {
+        console.error('Failed to update meal data:', error);
+        throw error;
+    });
+}
+
+
   logout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');

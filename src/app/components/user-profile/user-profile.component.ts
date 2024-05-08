@@ -13,6 +13,7 @@ import { ProfileUser } from '../../models/profile-user';
 import { FollowersDialogComponent } from '../followers-dialog/followers-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Recipe } from '../../models/recipe';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,6 +22,7 @@ import { Recipe } from '../../models/recipe';
 })
 export class UserProfileComponent implements OnInit {
   user$: Observable<ProfileUser> | undefined;
+  filterText = '';
   userRecipes$: Observable<Recipe[]> | undefined;
   referencedRecipes$: Observable<any[]> | undefined;
   showMenu: boolean = true; 
@@ -50,6 +52,7 @@ export class UserProfileComponent implements OnInit {
         }
       }
     });
+    
   }
   showFollowers() {
     this.followers$.subscribe(followers => {

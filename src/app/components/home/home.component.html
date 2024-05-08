@@ -1,5 +1,5 @@
-<app-menu *ngIf="showMenu"></app-menu>
-<input type="text" [(ngModel)]="filterText" placeholder="Search recipes" class="form-control mb-3">
+<app-menu *ngIf="showMenu" (searchEvent)="filterText = $event"></app-menu>
+
 
 <div  [style.background-image]="'url(' + bgImageUrl + ')'" class="recipe-background">
 

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 
@@ -8,9 +8,14 @@ import { Router } from '@angular/router';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
+  filterText: string = '';
   @ViewChild('menuButton') menuButton!: any;
+  @Output() searchEvent = new EventEmitter<string>();
   menuOpen: boolean = false;
   constructor(private firebaseService:FirebaseService, private router: Router){}
+  onSearchChange(searchValue: string): void {
+    this.searchEvent.emit(searchValue);
+}
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
