@@ -1,19 +1,35 @@
-<app-menu *ngIf="showMenu"></app-menu>
-<div *ngIf="user$ | async as user">
-  <h1>{{ user.username }}</h1>
-  <p>Email: {{ user.email }}</p>
-  <p>bio:{{user.bio}}</p>
-  <button (click)="showFollowers()"><h2>Followers {{ (followers$ | async)?.length || 0 }}</h2></button>
-  <button (click)="showFollowing()"><h2>Following {{ (followings$ | async)?.length || 0 }}</h2></button>
-  
-  <h2>Recipes</h2>
-  <ul>
-    <li *ngFor="let recipe of referencedRecipes$ | async">
-      <div>
-        <h3>{{ recipe.title }}</h3>
-        <p>{{ recipe.description }}</p>
+<app-menu *ngIf="showMenu" class="Nav-bar"></app-menu>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="el-baba">
+  <div *ngIf="user$ | async as user" class="two-divs-container">
+    <div class="user-info-card">
+      <div class="user-image"><img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"></div>
+      <h1>{{ user.username }}</h1>
+      <button (click)="showFollowers()" class="following-followers-btn">
+        <i class="fas fa-user-friends"></i> Followers {{ (followers$ | async)?.length || 0 }}
+      </button>
+      <button (click)="showFollowing()" class="following-followers-btn following-btn">
+        <i class="fas fa-user-friends"></i> Following {{ (followings$ | async)?.length || 0 }}
+      </button>
+      <div class="user-info-contaienr">
+        <i class="fas fa-envelope icon"></i>
+        <p> {{user.email}}</p>
+        <i class="fas fa-pencil-alt icon"></i>
+        <p> {{user.bio}}</p>
       </div>
-    </li>
-  </ul>
-  <img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture">
+    </div>
+    <div class="User-recipes-container">
+      <h2>Your Recipes</h2>
+      <ul>
+        <li *ngFor="let recipe of referencedRecipes$ | async">
+          <div>
+            <h3 >{{ recipe.title }}</h3>
+            <p >{{ recipe.description }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- <img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"> -->
+  </div>
 </div>

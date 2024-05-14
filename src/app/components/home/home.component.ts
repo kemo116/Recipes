@@ -126,6 +126,7 @@ export class HomeComponent implements OnInit{
         this.addCommentToRecipe(recipe, newComment);
       }
     });
+    
   }
   
   addCommentToRecipe(recipe: any, newComment: string): void {

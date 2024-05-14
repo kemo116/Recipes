@@ -1,4 +1,4 @@
-<mat-toolbar color="warn" class="mat-elevation-z8">
+<mat-toolbar class="Nav-Bar">
     <div class="menu-container" #menuButton>
         <button mat-icon-button (click)="toggleMenu()">
             <mat-icon>menu</mat-icon>
@@ -14,5 +14,5 @@
     <button routerLink="/plan" mat-button>Plan meals</button>
     <button mat-button>Discover</button>
     <button mat-button routerLink="/profile">My Profile</button>
-    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+    <button mat-raised-button (click)="logout()" class="log-out-btn">Logout</button>
 </mat-toolbar>

@@ -1,0 +1,83 @@
+.Nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+body {
+    position: relative;
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../assets/images/home-background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    overflow: auto;
+}
+
+.recipe-container {
+    position: absolute;
+    left: 50%;
+    max-width: 700px;
+    max-height: 800px;
+    top: 53.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #a8a8a88d;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    scrollbar-color: #bdbdbd #bdbdbd3e;
+}
+
+
+.title-txt {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recipe-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.ingredient-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ingredient-item {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.step-text {
+    font-size: 16px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.nutritional-info {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}

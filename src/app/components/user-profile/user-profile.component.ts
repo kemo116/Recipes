@@ -63,6 +63,7 @@ export class UserProfileComponent implements OnInit {
       });
     });
   }
+  
 
   showFollowing() {
     this.followings$.subscribe(followings => {

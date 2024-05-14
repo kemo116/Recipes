@@ -6,7 +6,7 @@
         <button (click)="onSignin(email.value, password.value)">Login</button>
     </div>
     <div class="login-link">
-        <span (click)="navigateToSignUp()"> Don't have an account? <a>Sign Up</a> </span>
+        <span (click)="navigateToSignUp()"> Don't have an account? <a>Register</a> </span>
     </div>
 </div>
 <app-home *ngIf="isSignedIn" (isLogout)="handlelogout() "></app-home>

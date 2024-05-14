@@ -1,44 +1,60 @@
-<app-menu *ngIf="showMenu"></app-menu>
-<input type="text" [(ngModel)]="filterText" placeholder="Search recipes" class="form-control mb-3">
+<app-menu *ngIf="showMenu" class="Nav-bar"></app-menu>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<div  [style.background-image]="'url(' + bgImageUrl + ')'" class="recipe-background">
+<!-- <div [style.background-image]="'url(' + bgImageUrl + ')'" class="recipe-background">-->
 
+<body>
 
-<!-- Bootstrap CSS included in a better place, usually in the head of your index.html -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <div class="home-background">
+    <!-- Bootstrap CSS included in a better place, usually in the head of your index.html -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <div class="search-bar-container">
+      <div class="search-bar-father">
+        <input type="text" [(ngModel)]="filterText" placeholder="Search recipes ... " class="searchbar">
+        <i class="search-icon fas fa-search"></i>
+      </div>
+    </div>
+    <!-- Recipes container -->
+    <!-- home.component.html -->
+    <div class="container mt-3">
+      <div class="row recipes-container" >
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let recipe of recipes | filter:filterText:'title'">
+          <div class="card recipe-card" >
+            <div class="recipes-container-bg" (click)="showDetails(recipe)"></div>
+            <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">{{ recipe.description | slice:0:100 }}...</p>
 
-<!-- Recipes container -->
-<!-- home.component.html -->
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let recipe of recipes | filter:filterText:'title'">
-      <div class="card">
-        <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ recipe.title }}</h5>
-          <p class="card-text">{{ recipe.description | slice:0:100 }}...</p>
-          <p>By: <a [routerLink]="['/user', recipe.username]">{{ recipe.username }}</a></p>
+              <p class="By-text">By: <a [routerLink]="['/user', recipe.username]">{{ recipe.username }}</a></p>
 
-          <button class="btn btn-outline-primary" (click)="likeRecipe(recipe)">Like {{ recipe.likes }}</button>
-          <button class="btn btn-outline-primary" (click)="openCommentPopup(recipe)">Comments</button>
-          <button class="btn btn-outline-primary" (click)="openReviewPopup(recipe)">Reviews</button>
-          <button class="btn btn-outline-primary" (click)="showDetails(recipe)">More Details</button>
-          <button class="btn btn-outline-primary" (click)="toggleRecipeSavedState(recipe)">
-            {{ recipe.saved ? 'Unsave' : 'Save' }}
-          </button>
-          <p>Rating: {{ calculateAverageRating(recipe) }}</p>
-          <div>
-            <!-- Display star icons for ratings -->
-            <button mat-icon-button *ngFor="let star of [1, 2, 3, 4, 5]" (click)="rateRecipe(recipe, star)">
-              <mat-icon>
-                  {{ star <= (recipe.ratings[currentUserId!] || 0) ? 'star' : 'star_border' }}
-              </mat-icon>
-          </button>
-          
+              <div class="buttons-container">
+                <button class="like-cmnt-btn btn btn-outline-primary" (click)="likeRecipe(recipe)">
+                  <i class="fas fa-heart"></i> {{ recipe.likes }}
+                </button>
+                <button class="like-cmnt-btn btn btn-outline-primary" (click)="openCommentPopup(recipe)">
+                  <i class="fas fa-comment"></i> Comments
+                </button>
+                <button class="btn btn-outline-primary" (click)="openReviewPopup(recipe)">Reviews</button>
+                <!-- <button class="btn btn-outline-primary" (click)="showDetails(recipe)">More Details</button> -->
+                <button class="btn btn-outline-primary" (click)="toggleRecipeSavedState(recipe)">
+                  {{ recipe.saved ? 'Unsave' : 'Save' }}
+                </button>
+              </div>
+              <div class="Rating-container">
+                <p class="Rating_txt">Rating: {{ calculateAverageRating(recipe) }}</p>
+                <div class="Rating-bar">
+                  <!-- Display star icons for ratings -->
+                  <button mat-icon-button *ngFor="let star of [1, 2, 3, 4, 5]" (click)="rateRecipe(recipe, star)">
+                    <mat-icon>
+                      {{ star <= (recipe.ratings[currentUserId!] || 0) ? 'star' : 'star_border' }} </mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
+</body>

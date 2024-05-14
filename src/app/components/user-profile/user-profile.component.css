@@ -1,51 +1,132 @@
-.form-container {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 500px;
-    margin: auto;
-    text-align: center;
-  }
-  
-  .profile-image {
-    position: relative;
-    margin: 20px auto;
-  }
-  
-  .profile-img {
-    border-radius: 50%;
-    border: 1px solid #ccc;
-  }
-  
-  .edit-button {
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .profile-form .row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .form-input {
-    padding: 8px;
-    width: calc(50% - 10px);
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .save-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.Nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.el-baba {
+  position: relative;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../assets/images/home-background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.two-divs-container {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info-card {
+  /* position: absolute; */
+  margin-right: 50px;
+  width: 17.5%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 50px 30px;
+  /* top: 20%;
+  left: 5%; */
+  border-radius: 20px;
+  background-color: #a8a8a88d;
+  backdrop-filter: blur(10px);
+  overflow: auto;
+}
+
+.User-recipes-container {
+  /* position: absolute; */
+  width: 60%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 50px 100px;
+  /* top: 20%;
+  left: 30%; */
+  border-radius: 20px;
+  background-color: #a8a8a88d;
+  backdrop-filter: blur(10px);
+  overflow: auto;
+}
+
+.User-recipes-container h2{
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.User-recipes-container h3{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.following-followers-btn {
+  margin: 10px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50px;
+  border: none;
+  background-color: #1328e0;
+  color: white;
+  transition: all 0.2s ease;
+  padding: 10px 70px;
+}
+
+.following-btn {
+  background-color: #cecece;
+  color: black;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+  margin-bottom: 40px;
+}
+
+.following-followers-btn:hover {
+  background-color: rgb(77, 94, 255);
+}
+
+.following:hover {
+  background-color: #ffffff;
+}
+
+.user-info-card p {
+  font-size: 16px;
+  margin-bottom: 30px;
+  align-self: flex-start;
+  /* white-space: pre-line; */
+}
+
+.icon {
+  align-self: flex-start;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+/* .user-info-contaienr{
+  border: 1px solid white;
+  border-radius: 10px;
+} */

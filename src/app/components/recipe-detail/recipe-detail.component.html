@@ -1,19 +1,20 @@
 <!-- In recipe-detail.component.html -->
-<app-menu *ngIf="showMenu"></app-menu>
-<div *ngIf="recipe$ | async as recipe">
-    <h2>{{ recipe.title }}</h2>
-    <img [src]="recipe.imageUrl" alt="Image of {{ recipe.title }}">
-    <h3>Ingredients:</h3>
-    <ul>
-      <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+<app-menu class="Nav-bar" *ngIf="showMenu"></app-menu>
+
+<body>
+  <div class="recipe-container" *ngIf="recipe$ | async as recipe">
+    <h2 class="title-txt">{{ recipe.title }}</h2>
+    <img class="recipe-image" [src]="recipe.imageUrl" alt="Image of {{ recipe.title }}">
+    <h3 class="section-title">Ingredients:</h3>
+    <ul class="ingredient-list">
+      <li class="ingredient-item" *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
     </ul>
-    <h3>Steps:</h3>
-    <p *ngFor="let step of recipe.steps">{{ step }}</p>
-    <h3>Nutritional Facts:</h3>
-    <p>Calories: {{ recipe.nutritionalFacts.calories }}</p>
-    <p>Protein: {{ recipe.nutritionalFacts.protein }}</p>
-    <p>Fat: {{ recipe.nutritionalFacts.fat }}</p>
-    <p>Carbs: {{ recipe.nutritionalFacts.carbs }}</p>
-    
-</div>
-  
+    <h3 class="section-title">Steps:</h3>
+    <p class="step-text" *ngFor="let step of recipe.steps">{{ step }}</p>
+    <h3 class="section-title">Nutritional Facts:</h3>
+    <p class="nutritional-info">Calories: {{ recipe.nutritionalFacts.calories }}</p>
+    <p class="nutritional-info">Protein: {{ recipe.nutritionalFacts.protein }}</p>
+    <p class="nutritional-info">Fat: {{ recipe.nutritionalFacts.fat }}</p>
+    <p class="nutritional-info">Carbs: {{ recipe.nutritionalFacts.carbs }}</p>
+  </div>
+</body>

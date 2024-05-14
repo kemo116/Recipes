@@ -1,35 +1,212 @@
+.Nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+
+.home-background {
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../assets/images/home-background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+}
+
+.search-bar-container {
+    padding: 100px 0px 25px 0px;
+    width: 100%;
+    max-width: 700px;
+    background-color: #99999900;
+    margin: auto;
+}
+
+.search-bar-father {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 15px 20px 15px 20px;
+    border-radius: 150px;
+    background-color: #a8a8a88d;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.search-bar-father:hover {
+    background-color: #a8a8a8;
+}
+
+.searchbar {
+    width: 93%;
+    height: 100%;
+    border: none;
+    /* background-color: coral; */
+    background-color: transparent;
+    outline: none;
+    /* This removes the default focus outline */
+    /* Additional styling as needed */
+    /* For example, you might want to adjust font size, color, etc. */
+    color: rgb(255, 255, 255);
+    /* Text color */
+    font-size: 16px;
+    /* Font size */
+    /* You can add more styles here */
+}
+
+.searchbar::placeholder {
+    color: #ffffff5f;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    color: #ffffff;
+    pointer-events: none;
+}
+
 .recipes-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: start;
+    padding: 0 15px;
+    /* background-color: #844f4f; */
 }
-.recipe-background {
-    height: 100vh; /* Full height */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; /* Cover the entire container */
-  }
+
+
 .recipe-card {
-    flex: 0 0 22%; /* Adjusts to fit 4 items per row, accounting for some margin */
+    position: relative;
+    width: 354.5px;
+    height: 650px;
     margin: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    background-color: #abababa2;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .recipe-card:hover {
-    transform: scale(1.05); /* Simple scale effect on hover */
+    transform: translateY(-5px);
+    background-color: #ababab;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.recipe-card img {
+.recipe-card .card-img-top {
+    position: absolute;
+    top: 0%;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 200px;
+    object-fit: cover;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .recipe-card {
-        flex: 0 0 48%; /* Adjusts to 2 items per row on smaller screens */
-    }
+.recipe-card .card-body {
+    padding: 20px;
+    background-color: #ffffff00;
+}
+
+.recipe-card .card-title {
+    position: absolute;
+    top: 33%;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.recipe-card .card-text {
+    position: absolute;
+    top: 38%;
+    font-size: 16px;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.By-text {
+    color: #333333;
+}
+
+
+.recipe-card .btn {
+    margin: 10px 10px 0px 0px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    background-color: #cecece;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+}
+
+.recipe-card .btn:hover {
+    background-color: #ffffff;
+}
+
+.recipe-card .btn i {
+    margin-right: 5px;
+}
+
+.recipe-card p {
+    font-size: 14px;
+    color: #999999;
+}
+
+.recipe-card button.mat-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.recipe-card button.mat-icon-button:hover {
+    color: #ff6b6b;
+}
+
+.recipe-card button.mat-icon-button .mat-icon {
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+
+.recipe-card button.mat-icon-button .mat-icon:hover {
+    transform: scale(1.2);
+}
+
+.recipe-card .card-body .Rating_txt {
+    margin-top: 50px;
+    margin-left: 15px;
+    font-size: 20;
+    font-weight: 900;
+    color: #333333;
+}
+
+.Rating-container {
+    position: absolute;
+    bottom: 5%;
+    /* right: 30%; */
+    /* transform: translateY(50%); */
+}
+
+.buttons-container{
+    position: absolute;
+    top: 60%;
+}
+
+.recipe-card .card-body .By-text {
+    position: absolute;
+    top: 55%;
+    color: #333333;
+    font-size: 20;
+    font-weight: 900;
+}
+
+.recipes-container-bg{
+    width: 100%;
+    height: 100%;
+    background-color: #ff000000;
 }
