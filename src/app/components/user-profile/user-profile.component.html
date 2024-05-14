@@ -20,15 +20,13 @@
       </div>
     </div>
     <div class="User-recipes-container">
-      <h2>Your Recipes</h2>
-      <ul>
-        <li *ngFor="let recipe of referencedRecipes$ | async">
-          <div>
-            <h3 >{{ recipe.title }}</h3>
-            <p >{{ recipe.description }}</p>
-          </div>
-        </li>
-      </ul>
+      <!-- <div class="user-recipes-title"><h2>Your Ricepes</h2></div> -->
+      <div *ngFor="let recipe of referencedRecipes$ | async" class="recipes-small-container">
+        <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}">
+        <h3>{{ recipe.title }}</h3>
+        <div class="recipe-title-bg"></div>
+        <div class="recipe-effect"></div>
+      </div>
     </div>
     <!-- <img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"> -->
   </div>

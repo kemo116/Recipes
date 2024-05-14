@@ -17,9 +17,9 @@
     <!-- Recipes container -->
     <!-- home.component.html -->
     <div class="container mt-3">
-      <div class="row recipes-container" >
+      <div class="row recipes-container">
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let recipe of recipes | filter:filterText:'title'">
-          <div class="card recipe-card" >
+          <div class="card recipe-card">
             <div class="recipes-container-bg" (click)="showDetails(recipe)"></div>
             <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}">
             <div class="card-body">
