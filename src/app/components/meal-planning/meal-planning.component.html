@@ -1,21 +1,66 @@
-<app-menu *ngIf="showMenu"></app-menu>
-
-<p class="head"> Meal-planning</p>
-<hr class="divider">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+<app-menu *ngIf="showMenu" (searchEvent)="filterText = $event"></app-menu>
+<!--استعد للزنا الكبييييير اوي-->
 <div class="container">
-  <div class="days-row">
-    <div class="day" *ngFor="let day of days" (click)="selectDay(day)" 
-         [class.selected]="selectedDay === day">
-      {{ day }}
-    </div>
+  <h2>Meal Plan</h2>
+
+  <!-- Day Selection ana mksoof -->
+  <div>
+    <h3>Select a Day:</h3>
+    <select [(ngModel)]="selectedDay">
+      <option value="" disabled selected>Select Day</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+      <option value="Sunday">Sunday</option>
+    </select>
+  </div>
+
+  <!-- Meal Type Selection ana mo7rag -->
+  <div>
+    <h3>Select a Meal Type:</h3>
+    <button (click)="onSelectMealType('Breakfast')">Breakfast</button>
+    <button (click)="onSelectMealType('Lunch')">Lunch</button>
+    <button (click)="onSelectMealType('Dinner')">Dinner</button>
+  </div>
+
+  <!-- Recipe Selection والله شوف -->
+  <div *ngIf="selectedMealType">
+    <h3>Choose a Recipe for {{selectedMealType | capitalize}}:</h3>
+    <ul *ngIf="recipes$ | async as recipes; else noRecipes">
+        <li *ngFor="let recipe of recipes">
+            <span>{{ recipe.title }}</span>
+            <button (click)="addMealToPlan(recipe)">Add to {{selectedMealType}}</button>
+        </li>
+    </ul>
+    <ng-template #noRecipes><p>No recipes available.</p></ng-template>
 </div>
-<div class="meals-row">
-  <button (click)="addMeal('Breakfast')"><i class="fas fa-plus"></i> Add Breakfast</button>
-  <button (click)="addMeal('Lunch')"><i class="fas fa-plus"></i> Add Lunch</button>
-  <button (click)="addMeal('Dinner')"><i class="fas fa-plus"></i> Add Dinner</button>
+
+
+
+
+
+<!-- Displaying Meal Plans  ana bgd bgd asef -->
+<div *ngFor="let plan of mealPlans">
+  <h3>{{ plan.day }}</h3>
+  <div *ngFor="let mealType of ['Breakfast', 'Lunch', 'Dinner']">
+    <h4>{{ mealType }}</h4>
+    <ul>
+      <li *ngFor="let recipe of plan.meals[mealType]">{{ recipe.title }}</li>
+    </ul>
+  </div>
 </div>
+
+<!-- ana asef awi -->
+<div *ngIf="similarRecipes$ | async as similarRecipes; else noSimilarRecipes">
+  <h3>Shopping List:</h3>
+  <ul>
+    <li *ngFor="let recipe of similarRecipes">
+      <span>{{ recipe.title }}</span>
+    </li>
+  </ul>
+</div>
+<ng-template #noSimilarRecipes><p>No similar recipes available.</p></ng-template>
 </div>

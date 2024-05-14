@@ -26,10 +26,10 @@ import { SavedRecipesComponent } from './components/saved-recipes/saved-recipes.
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
 import { ReviewsPopupComponent } from './components/reviews-popup/reviews-popup.component';
 import { MealPlanningComponent } from './components/meal-planning/meal-planning.component';
-import { RecipeSelectionDialogComponent } from './components/recipe-selection-dialog/recipe-selection-dialog.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { CapitalizePipe } from './pipe/capitalize.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,8 +46,8 @@ import { CommonModule } from '@angular/common';
     SavedRecipesComponent,
     PublicProfileComponent,
     ReviewsPopupComponent,
-    RecipeSelectionDialogComponent,
     MealPlanningComponent,
+    CapitalizePipe,
   ],
   imports: [
     CommonModule,

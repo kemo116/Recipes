@@ -18,6 +18,7 @@ export class PostRecipeComponent {
     const acollection = collection(this.firestore.firestore, 'recipes');
     const recipeIngredients = this.recipeForm.value.ingredients.split('\n').map((ingredient: string) => ingredient.trim());
     const recipeSteps = this.recipeForm.value.steps.split('\n').map((step: string) => step.trim());
+    const tags = this.recipeForm.value.tags.split('\n').map((tag: string) => tag.trim());
 
     this.firebaseService.currentUser$.subscribe(currentUser => {
       if (currentUser) {
@@ -28,13 +29,15 @@ export class PostRecipeComponent {
           'cuisine': this.recipeForm.value.cuisine,
           'requiredTime': this.recipeForm.value.requiredTime,
           'category':this.recipeForm.value.category,
+          'mealType':this.recipeForm.value.mealType,
+          'tags':tags,
           'description': this.recipeForm.value.description,
           'imageUrl': this.recipeForm.value.imageUrl,
           'steps': recipeSteps,
           'ingredients': recipeIngredients,
           'likes': 0,
           'comments': [],
-          'rating': 0,
+          'ratings': [],
           'reviews': [],
           'username': username,
           'isFollowed': false,
