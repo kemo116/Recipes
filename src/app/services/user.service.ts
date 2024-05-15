@@ -85,18 +85,7 @@ export class UserService {
         map((user: any) => user.following ? user.following.length : 0)
       );
   }
-  getCurrentUserUsername(): Observable<string | null> {
-    return this.afAuth.authState.pipe(
-      map(user => {
-        if (user) {
-          // User is logged in, return the username
-          return user.displayName; // Assuming username is stored in displayName
-        } else {
-          // User is not logged in
-          return null;
-        }
-      })
-    );
-  }
+  
+  
   
 }

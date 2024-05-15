@@ -141,8 +141,15 @@ export class HomeComponent implements OnInit {
   }
 
   showUserProfile(username: string): void {
-    this.router.navigate(['/user', username]);
+    this.firebaseService.getCurrentUsername().subscribe(currentUsername => {
+      if (currentUsername === username) {
+        this.router.navigate(['/profile']);
+      } else {
+        this.router.navigate(['/user', username]);
+      }
+    });
   }
+  
 
   rateRecipe(recipe: any, rating: number): void {
     const currentUserId = this.firebaseService.getCurrentUserId();
