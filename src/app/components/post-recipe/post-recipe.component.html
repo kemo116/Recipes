@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <app-menu *ngIf="showMenu" class="Nav-bar"></app-menu>
 <html lang="en">
-
 <body>
-    <div class="form-container">
-        <h1>ADD YOUR RECIPE DETAILS</h1>
-        <form #createPostRecipeform="ngForm">
-            <div>
-                <label for="title">Recipe Title:</label>
-                <input type="text" name="title" ngModel required />
-            </div>
-            <div>
-                <label for="cuisine">Cuisine:</label>
-                <input type="text" name="cuisine" ngModel required />
-            </div>
-            <div>
-                <label for="requiredTime">Required Time:</label>
-                <input type="text" name="requiredTime" ngModel required />
-            </div>
-            <div>
-                <label for="category">Category:</label>
-                <input type="text" name="category" ngModel required />
-            </div>
-            <div>
-                <label for="description">Description:</label>
-                <textarea name="description" rows="4" ngModel></textarea>
-            </div>
-            <div>
-                <label for="ingredients">Recipe Ingredients:</label>
-                <textarea name="ingredients" rows="4" ngModel required></textarea>
-            </div>
-            <div>
-                <label for="steps">Recipe Steps:</label>
-                <textarea name="steps" rows="4" ngModel required></textarea>
-            </div>
-            <div>
-                <label for="imageUrl">Recipe Photo (URL/Link):</label>
-                <input type="text" name="imageUrl" ngModel />
-            </div>
-            <div>
-                <button type="button" (click)="postRecipe()" [disabled]="!createPostRecipeform.valid">Post
-                    Recipe</button>
-            </div>
-        </form>
-    </div>
+        <div class="form-container">
+            <h1>ADD YOUR RECIPE DETAILS</h1>
+            <form #createPostRecipeform="ngForm">
+                <div>
+                    <label for="title">Recipe Title:</label>
+                    <input type="text" name="title" ngModel required />
+                </div>
+                <div>
+                    <label for="cuisine">Cuisine:</label>
+                    <input type="text" name="cuisine" ngModel required />
+                </div>
+                <div>
+                    <label for="requiredTime">Required Time:</label>
+                    <input type="text" name="requiredTime" ngModel required />
+                </div>
+                <div>
+                    <label for="category">Category:</label>
+                    <input type="text" name="category" ngModel required />
+                </div>
+                <div>
+                    <label for="description">Description:</label>
+                    <textarea name="description" rows="4" ngModel></textarea>
+                </div>
+                <div>
+                    <label for="ingredients">Recipe Ingredients:</label>
+                    <textarea name="ingredients" rows="4" ngModel required></textarea>
+                </div>
+                <div>
+                    <label for="steps">Recipe Steps:</label>
+                    <textarea name="steps" rows="4" ngModel required></textarea>
+                </div>
+                <div>
+                    <label for="imageUrl">Recipe Photo (URL/Link):</label>
+                    <input type="text" name="imageUrl" ngModel />
+                </div>
+                <div>
+                    <button type="button" (click)="postRecipe()" [disabled]="!createPostRecipeform.valid">Post
+                        Recipe</button>
+                </div>
+            </form>
+        </div>
 
 </body>
 
