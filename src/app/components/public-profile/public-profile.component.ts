@@ -5,6 +5,7 @@ import { ProfileUser } from '../../models/profile-user';
 import { FirebaseService } from '../../services/firebase.service';
 import { Recipe } from '../../models/recipe';
 import { forkJoin, switchMap, take } from 'rxjs';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-public-profile',
@@ -17,7 +18,8 @@ export class PublicProfileComponent implements OnInit {
   followerCount: number = 0;
   followingCount: number = 0;
   showMenu: boolean = true;
-  constructor(private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService) { }
+  
+  constructor(private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -26,7 +28,8 @@ export class PublicProfileComponent implements OnInit {
         this.user = user;
         if (user) {
           this.updateFollowerAndFollowingCounts(user.id);
-          this.getUserRecipes(user.postedRecipes ?? []);// Pass postedRecipes instead of id
+          // Call method to fetch recipes by username
+          this.getRecipesByCommonUsername(username);
         }
       });
     });
@@ -43,8 +46,8 @@ export class PublicProfileComponent implements OnInit {
   }
 
   // Change parameter to recipeIds: string[]
-  getUserRecipes(recipeIds: string[]): void {
-    this.userService.getReferencedRecipes(recipeIds).subscribe(recipes => { // Use getReferencedRecipes instead of getUserRecipes
+  getRecipesByCommonUsername(username: string): void {
+    this.recipeService.getRecipesByCommonUsername(username).subscribe(recipes => {
       this.postedRecipes = recipes;
     });
   }

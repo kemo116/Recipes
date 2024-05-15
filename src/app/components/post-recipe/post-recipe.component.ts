@@ -34,6 +34,7 @@ export class PostRecipeComponent {
     const acollection = collection(this.firestore.firestore, 'recipes');
     const recipeIngredients = this.recipeForm.value.ingredients.split('\n').map((ingredient: string) => ingredient.trim());
     const recipeSteps = this.recipeForm.value.steps.split('\n').map((step: string) => step.trim());
+    const hashtags = this.recipeForm.value.tags.split('\n').map((tag: string) => tag.trim());
 
     this.firebaseService.currentUser$.subscribe(currentUser => {
       if (currentUser) {
@@ -56,6 +57,7 @@ export class PostRecipeComponent {
           'reviews': [],
           'username': username,
           'isFollowed': false,
+          'tags':hashtags
         })
         .then(() => {
           console.log('Recipe posted successfully');
