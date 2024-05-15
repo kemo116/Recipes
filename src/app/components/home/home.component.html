@@ -25,7 +25,7 @@
               <h5 class="card-title">{{ recipe.title }}</h5>
               <p class="card-text">{{ recipe.description | slice:0:100 }}...</p>
 
-              <p class="By-text">By: <a [routerLink]="['/user', recipe.username]">{{ recipe.username }}</a></p>
+              <p class="By-text">By: <a (click)="showUserProfile(recipe.username)">{{ recipe.username }}</a></p>
 
               <div class="buttons-container">
                 <button class="like-cmnt-btn btn btn-outline-primary" (click)="likeRecipe(recipe)">

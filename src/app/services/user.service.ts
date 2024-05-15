@@ -12,13 +12,16 @@ import { docData } from 'rxfire/firestore';
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore,private afAuth: AngularFireAuth ) {}
 
   getUserById(userId: string): Observable<any> {
     return this.afs.collection('users').doc(userId).valueChanges();
   }
   getUserRecipes(userId: string): Observable<any[]> {
     return this.afs.collection('recipes', ref => ref.where('userId', '==', userId)).valueChanges();
+  }
+  getRecipesByCommonUsername(username: string): Observable<Recipe[]> {
+    return this.afs.collection('recipes', ref => ref.where('username', '==', username)).valueChanges() as Observable<Recipe[]>;
   }
   
   // Function to get recipes referenced by the user
@@ -82,5 +85,7 @@ export class UserService {
         map((user: any) => user.following ? user.following.length : 0)
       );
   }
+  
+  
   
 }

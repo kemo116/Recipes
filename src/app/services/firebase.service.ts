@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { Recipe } from '../models/recipe';
 interface MealEntry {
   userId: string;
@@ -124,7 +124,21 @@ export class FirebaseService {
         throw error;
     });
 }
-
+getCurrentUsername(): Observable<string | null> {
+  return this.firebaseAuth.authState.pipe(
+    switchMap(user => {
+      if (user) {
+        // If the user is logged in, fetch additional user data (such as username) from Firestore
+        return this.firestore.collection('users').doc<any>(user.uid).valueChanges().pipe(
+          map(userData => userData?.username || null) // Ensuring a fallback to null if userData or username is unavailable
+        );
+      } else {
+        // If no user is logged in, return null
+        return of(null); // Import 'of' from 'rxjs' if not already imported
+      }
+    })
+  );
+}
 
   logout() {
     this.firebaseAuth.signOut();
