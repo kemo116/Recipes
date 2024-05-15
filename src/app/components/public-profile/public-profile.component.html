@@ -1,19 +1,19 @@
-<app-menu *ngIf="showMenu"></app-menu>
+<app-menu *ngIf="showMenu" class="Nav-bar"></app-menu>
 
-<div *ngIf="user">
+<div *ngIf="user" class="public-profile">
   <h1>{{ user.username }}</h1>
   <p>Email: {{ user.email }}</p>
   <!-- Other user details -->
-  <button (click)="toggleFollowUser(user)">
+  <button (click)="toggleFollowUser(user)" class="following-followers-btn">
     {{ isFollowing(user) ? 'Unfollow' : 'Follow' }}
   </button>
-  <p>Followers: {{ followerCount }}</p>
-  <p>Following: {{ followingCount }}</p>
+  <p class="following-followers-count">Followers: {{ followerCount }}</p>
+  <p class="following-followers-count">Following: {{ followingCount }}</p>
 
-  <h2>Posted Recipes</h2>
-  <ul>
-    <li *ngFor="let recipe of postedRecipes">
-      <div>
+  <h2 class="user-recipes-title">Posted Recipes</h2>
+  <ul class="user-recipes-list">
+    <li *ngFor="let recipe of postedRecipes" class="recipe-item">
+      <div class="recipe-details">
         <h3>{{ recipe.title }}</h3>
         <p>{{ recipe.description }}</p>
         <!-- Add other recipe details as needed -->

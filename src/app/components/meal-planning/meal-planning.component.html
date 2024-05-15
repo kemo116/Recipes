@@ -1,13 +1,13 @@
-<app-menu *ngIf="showMenu" (searchEvent)="filterText = $event"></app-menu>
+<app-menu *ngIf="showMenu" (searchEvent)="filterText = $event" class="Nav-bar"></app-menu>
 <!--استعد للزنا الكبييييير اوي-->
 <div class="container">
-  <h2>Meal Plan</h2>
+  <h2 class="page-title">Meal Planning</h2>
 
   <!-- Day Selection ana mksoof -->
-  <div>
-    <h3>Select a Day:</h3>
-    <select [(ngModel)]="selectedDay">
-      <option value="" disabled selected>Select Day</option>
+  <div class="select-container">
+    <!-- <h3 class="select-header">Select a Day</h3> -->
+    <select [(ngModel)]="selectedDay" class="select-menu">
+      <option value="" disabled selected>Select A Day</option>
       <option value="Monday">Monday</option>
       <option value="Tuesday">Tuesday</option>
       <option value="Wednesday">Wednesday</option>
@@ -19,48 +19,69 @@
   </div>
 
   <!-- Meal Type Selection ana mo7rag -->
-  <div>
-    <h3>Select a Meal Type:</h3>
-    <button (click)="onSelectMealType('Breakfast')">Breakfast</button>
-    <button (click)="onSelectMealType('Lunch')">Lunch</button>
-    <button (click)="onSelectMealType('Dinner')">Dinner</button>
+  <div class="meal-type-container">
+    <h3 class="meal-type-header">Select a Meal Type</h3>
+    <button (click)="onSelectMealType('Breakfast')" class="meal-type-button breakfast">Breakfast</button>
+    <button (click)="onSelectMealType('Lunch')" class="meal-type-button lunch">Lunch</button>
+    <button (click)="onSelectMealType('Dinner')" class="meal-type-button dinner">Dinner</button>
   </div>
+
 
   <!-- Recipe Selection والله شوف -->
-  <div *ngIf="selectedMealType">
-    <h3>Choose a Recipe for {{selectedMealType | capitalize}}:</h3>
-    <ul *ngIf="recipes$ | async as recipes; else noRecipes">
-        <li *ngFor="let recipe of recipes">
-            <span>{{ recipe.title }}</span>
-            <button (click)="addMealToPlan(recipe)">Add to {{selectedMealType}}</button>
-        </li>
+  <div *ngIf="selectedMealType" class="recipe-selection">
+    <h3 class="recipe-selection-header">Recipes Options for {{selectedMealType | capitalize}}:</h3>
+    <ul *ngIf="recipes$ | async as recipes; else noRecipes" class="recipe-list">
+      <li *ngFor="let recipe of recipes" class="recipe-item">
+        <span class="recipe-title">{{ recipe.title }}</span>
+        <button (click)="addMealToPlan(recipe)" class="add-button">Add to {{selectedMealType}}</button>
+      </li>
     </ul>
-    <ng-template #noRecipes><p>No recipes available.</p></ng-template>
-</div>
-
-
-
-
-
-<!-- Displaying Meal Plans  ana bgd bgd asef -->
-<div *ngFor="let plan of mealPlans">
-  <h3>{{ plan.day }}</h3>
-  <div *ngFor="let mealType of ['Breakfast', 'Lunch', 'Dinner']">
-    <h4>{{ mealType }}</h4>
-    <ul>
-      <li *ngFor="let recipe of plan.meals[mealType]">{{ recipe.title }}</li>
-    </ul>
+    <ng-template #noRecipes>
+      <p class="no-recipes">No recipes available.</p>
+    </ng-template>
   </div>
-</div>
 
-<!-- ana asef awi -->
-<div *ngIf="similarRecipes$ | async as similarRecipes; else noSimilarRecipes">
-  <h3>Shopping List:</h3>
-  <ul>
-    <li *ngFor="let recipe of similarRecipes">
-      <span>{{ recipe.title }}</span>
-    </li>
-  </ul>
-</div>
-<ng-template #noSimilarRecipes><p>No similar recipes available.</p></ng-template>
-</div>
+
+
+
+
+
+
+  <!-- Displaying Meal Plans  ana bgd bgd asef -->
+  <div class="meal-plan-container">
+    <div class="meal-plan-card">
+      <h2 class="meal-plan-title">Planned Meals</h2>
+      <div class="meal-plans">
+        <div *ngFor="let plan of mealPlans" class="meal-plan">
+          <div class="day">
+            <h3>{{ plan.day }}</h3>
+            <div *ngFor="let mealType of ['Breakfast', 'Lunch', 'Dinner']" class="meal-type">
+              <div class="meal">
+                <h4>{{ mealType }}</h4>
+                <ul>
+                  <li *ngFor="let recipe of plan.meals[mealType]">{{ recipe.title }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="shopping-list-container">
+    <div *ngIf="similarRecipes$ | async as similarRecipes; else noSimilarRecipes" class="shopping-list">
+      <h3 class="shopping-list-title">Shopping List:</h3>
+      <ul class="shopping-list-items">
+        <li *ngFor="let recipe of similarRecipes" class="shopping-list-item">
+          <span>{{ recipe.title }}</span>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noSimilarRecipes>
+      <p class="no-recipes">No similar recipes available.</p>
+    </ng-template>
+  </div>
