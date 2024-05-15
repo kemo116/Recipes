@@ -69,18 +69,27 @@
     pointer-events: none;
 }
 
+
 .recipes-container {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: start; 
     padding: 0 15px;
     /* background-color: #844f4f; */
 }
 
+/* .hidden-parent{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    background-color: #333333;
+} */
 
 .recipe-card {
     position: relative;
-    width: 354.5px;
+    width: 18.5%;
     height: 650px;
     margin: 10px;
     border-radius: 40px;
