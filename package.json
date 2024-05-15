@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@fortawesome/fontawesome-free": "^6.5.2",
     "cors": "^2.8.5",
     "firebase": "^10.11.1",
     "rxfire": "^6.0.5",

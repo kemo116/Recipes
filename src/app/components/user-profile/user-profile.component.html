@@ -4,7 +4,7 @@
 <div class="el-baba">
   <div *ngIf="user$ | async as user" class="two-divs-container">
     <div class="user-info-card">
-      <div class="user-image"><img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"></div>
+      <!-- <div class="user-image"><img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"></div> -->
       <h1>{{ user.username }}</h1>
       <button (click)="showFollowers()" class="following-followers-btn">
         <i class="fas fa-user-friends"></i> Followers {{ (followers$ | async)?.length || 0 }}
@@ -31,3 +31,4 @@
     <!-- <img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"> -->
   </div>
 </div>
+<app-footer></app-footer>

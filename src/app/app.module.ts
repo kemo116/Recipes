@@ -30,6 +30,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { CapitalizePipe } from './pipe/capitalize.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,8 @@ import { CapitalizePipe } from './pipe/capitalize.pipe';
     ReviewsPopupComponent,
     MealPlanningComponent,
     CapitalizePipe,
+    FooterComponent,
+    
   ],
   imports: [
     CommonModule,

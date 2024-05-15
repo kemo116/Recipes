@@ -25,7 +25,7 @@ export class MealPlanningComponent implements OnInit{
   selectedMealType: 'Breakfast' | 'Lunch' | 'Dinner' | '' = '';
   similarRecipes$: Observable<any[]> = of([]);
 
-  constructor(private recipeService: RecipeService, private firebaseService: FirebaseService) {}
+  constructor(private recipeService: RecipeService, private firebaseService: FirebaseService, private dialog:MatDialog) {}
   ngOnInit(): void {
     this.loadMealPlans();
   }
@@ -83,6 +83,8 @@ addMealToPlan(recipe: any) {
     dayPlan.meals[this.selectedMealType].push(recipe);
   this.saveMealPlans();
 }
+
+
 
 
 }
