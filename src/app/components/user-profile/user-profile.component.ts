@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
   user$: Observable<ProfileUser> | undefined;
   filterText = '';
   userRecipes$: Observable<Recipe[]> | undefined;
-  referencedRecipes$: Observable<any[]> | undefined;
+  referencedRecipes$: Observable<Recipe[]> | undefined;
   showMenu: boolean = true; 
   followers$!: Observable<any[]> ;
   followings$!: Observable<any[]>;
@@ -39,8 +39,8 @@ export class UserProfileComponent implements OnInit {
           this.user$ = this.userService.getUserById(this.userId);
           this.userRecipes$ = this.userService.getUserRecipes(this.userId);
           this.user$?.subscribe(user => {
-            if (user && user.postedRecipes) {
-              this.referencedRecipes$ = this.userService.getReferencedRecipes(user.postedRecipes);
+            if (user && user.username) {
+              this.getReferencedRecipesByCommonUsername(user.username);
             }
           });
           this.user$?.subscribe(userData => {
@@ -52,7 +52,10 @@ export class UserProfileComponent implements OnInit {
         }
       }
     });
-    
+  }
+
+  getReferencedRecipesByCommonUsername(username: string): void {
+    this.referencedRecipes$ = this.userService.getRecipesByCommonUsername(username);
   }
   showFollowers() {
     this.followers$.subscribe(followers => {

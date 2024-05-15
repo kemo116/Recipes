@@ -38,6 +38,9 @@ getRecipesByTags(tags: string[]): Observable<any[]> {
     ref.where('tags', 'array-contains-any', tags)
   ).valueChanges({ idField: 'id' });
 }
+getRecipesByCommonUsername(username: string): Observable<Recipe[]> {
+  return this.firestore.collection('recipes', ref => ref.where('username', '==', username)).valueChanges({ idField: 'id' }) as Observable<Recipe[]>;
+}
 
 
   

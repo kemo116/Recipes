@@ -131,6 +131,7 @@
 .By-text {
     color: #333333;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 
