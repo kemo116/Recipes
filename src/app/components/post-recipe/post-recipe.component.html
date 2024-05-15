@@ -14,6 +14,10 @@
                     <input type="text" name="cuisine" ngModel required />
                 </div>
                 <div>
+                    <label for="mealType">Meal Type:</label>
+                    <input type="text" name="mealType" ngModel required />
+                </div>
+                <div>
                     <label for="requiredTime">Required Time:</label>
                     <input type="text" name="requiredTime" ngModel required />
                 </div>
@@ -32,6 +36,18 @@
                 <div>
                     <label for="steps">Recipe Steps:</label>
                     <textarea name="steps" rows="4" ngModel required></textarea>
+                </div>
+                <div>
+                    <label for="nutritionalFacts">Nutritional Facts:</label>
+                    <div *ngFor="let fact of nutritionalFacts | keyvalue; trackBy: trackByFn">
+                        <input 
+                            type="text" 
+                            [placeholder]="getPlaceholder(fact.key)" 
+                            [(ngModel)]="nutritionalFacts[fact.key]" 
+                            name="factName{{fact.key}}" 
+                            required 
+                        />
+                    </div>
                 </div>
                 <div>
                     <label for="imageUrl">Recipe Photo (URL/Link):</label>

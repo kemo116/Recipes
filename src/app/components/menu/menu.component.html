@@ -1,21 +1,11 @@
 <mat-toolbar class="Nav-Bar">
-    <div class="menu-container" #menuButton>
-        <button mat-icon-button (click)="toggleMenu()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <div class="menu" *ngIf="menuOpen">
-            <button mat-menu-item routerLink="/saved">Saved Recipes</button>
-        </div>
-    </div>
+    
     <span>Let Him Kok</span>
     <span class="example-spacer"></span>
-    <input type="text" [(ngModel)]="filterText" (ngModelChange)="onSearchChange($event)" placeholder="Search recipes" class="search-input">
-
-
     <button routerLink="/home" mat-button>Home</button>
     <button routerLink="/post" mat-button>Post A recipe</button>
     <button routerLink="/plan" mat-button>Plan meals</button>
-    <button mat-button>Discover</button>
+    <button mat-button routerLink="/saved">Saved Recipes</button>
     <button mat-button routerLink="/profile">My Profile</button>
     <button mat-raised-button (click)="logout()" class="log-out-btn">Logout</button>
 </mat-toolbar>
