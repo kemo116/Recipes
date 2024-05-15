@@ -1,3 +1,8 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+
 .Nav-bar {
     position: fixed;
     top: 0;
@@ -74,8 +79,9 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: start; 
-    padding: 0 15px;
+    justify-content: start;
+    padding: 0px 15px;
+    box-sizing: border-box;
     /* background-color: #844f4f; */
 }
 
@@ -89,7 +95,7 @@
 
 .recipe-card {
     position: relative;
-    width: 18.5%;
+    width: 18.93%;
     height: 650px;
     margin: 10px;
     border-radius: 40px;
