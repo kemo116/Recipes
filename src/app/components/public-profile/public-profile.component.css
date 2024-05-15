@@ -1,0 +1,70 @@
+.Nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.public-profile {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 30px;
+    border-radius: 20px;
+    background-color: #ffffff94;
+    backdrop-filter: blur(20px);
+    overflow: auto;
+}
+
+.public-profile h1 {
+    font-size: 24px;
+}
+
+.public-profile p {
+    font-size: 16px;
+}
+
+.following-followers-btn {
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    border: none;
+    background-color: #1328e0;
+    color: white;
+    transition: all 0.2s ease;
+    padding: 10px 20px;
+}
+
+.following-followers-btn:hover {
+    background-color: rgb(77, 94, 255);
+}
+
+.following-followers-count {
+    font-size: 14px;
+}
+
+.user-recipes-title {
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 20px;
+}
+
+.user-recipes-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe-item {
+    margin-top: 20px;
+}
+
+.recipe-details h3 {
+    font-size: 20px;
+}
+
+.recipe-details p {
+    font-size: 16px;
+}

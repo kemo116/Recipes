@@ -29,8 +29,8 @@ body {
     margin-top: 65px;
     border-radius: 20px;
     box-shadow: 0 0 200px rgba(118, 118, 118, 0.1);
-    background-color: #abababa2;
-    backdrop-filter: blur(10px);
+    background-color: #ffffff94;
+  backdrop-filter: blur(20px);
     overflow: auto;
 }
 
