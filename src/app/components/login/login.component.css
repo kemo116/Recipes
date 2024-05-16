@@ -53,7 +53,9 @@
     font-weight: bold;
     
 }
-
+.error-message{
+    color:white;
+}
 .login-link a {
     color: #007bff;
     text-decoration: none;

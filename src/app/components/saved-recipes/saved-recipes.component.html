@@ -9,8 +9,8 @@
         <button class="btn btn-outline-primary" (click)="showDetails(recipe)">More Details</button>
   </div>
 </div> -->
-  <div class="User-recipes-container" *ngIf="savedRecipes.length > 0; else noRecipes">
-    <div *ngFor="let recipe of savedRecipes" class="recipes-small-container">
+  <div class="User-recipes-container" *ngIf="savedRecipes.length > 0; else noRecipes" >
+    <div *ngFor="let recipe of savedRecipes" class="recipes-small-container" (click)="showDetails(recipe)">
       <img [src]="recipe.imageUrl" alt="Image of {{ recipe.title }}" class="card-img-top">
       <h3>{{ recipe.title }}</h3>
       <div class="recipe-title-bg"></div>
