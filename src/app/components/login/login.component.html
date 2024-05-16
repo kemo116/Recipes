@@ -1,14 +1,19 @@
-<div class="signup-container" *ngIf="!isSignedIn">
+<body>
+  <div class="signup-container" *ngIf="!isSignedIn">
     <h2>Login</h2>
     <div class="signup-form">
-      <input type="text" placeholder="Email" #email>
-      <input type="password" placeholder="Password" #password>
+      <input type="text" placeholder="Email" #email />
+      <input type="password" placeholder="Password" #password />
       <button (click)="onSignin(email.value, password.value)">Login</button>
-      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div> <!-- Display error message -->
-    </div>
-    <div class="login-link">
-      <span (click)="navigateToSignUp()"> Don't have an account? <a>Register</a> </span>
+
+      <div class="login-link">
+        <span (click)="navigateToSignUp()">
+          Don't have an account? <a>Register</a>
+        </span>
+      </div>
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <!-- Display error message -->
     </div>
   </div>
   <app-home *ngIf="isSignedIn" (isLogout)="handlelogout()"></app-home>
-  
+</body>

@@ -1,11 +1,13 @@
 <app-menu *ngIf="showMenu" class="Nav-bar"></app-menu>
-
-<div *ngIf="user" class="public-profile">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+<!-- <div *ngIf="user" class="public-profile">
   <h1>{{ user.username }}</h1>
   <p>Email: {{ user.email }}</p>
-  <!-- Other user details -->
   <button (click)="toggleFollowUser(user)" class="following-followers-btn">
-    {{ isFollowing(user) ? 'Unfollow' : 'Follow' }}
+    {{ isFollowing(user) ? "Unfollow" : "Follow" }}
   </button>
   <p class="following-followers-count">Followers: {{ followerCount }}</p>
   <p class="following-followers-count">Following: {{ followingCount }}</p>
@@ -16,9 +18,47 @@
       <div class="recipe-details">
         <h3>{{ recipe.title }}</h3>
         <p>{{ recipe.description }}</p>
-        <!-- Add other recipe details as needed -->
       </div>
     </li>
   </ul>
+</div> -->
+<div class="el-baba">
+  <div class="two-divs-container">
+    <div *ngIf="user" class="public-profile">
+
+      <div class="user-info-card">
+        <!-- <div class="user-image"><img [src]="user.profilePicture" *ngIf="user.profilePicture" alt="Profile Picture"></div> -->
+        <h1>{{ user.username }}</h1>
+        <button
+          (click)="toggleFollowUser(user)"
+          class="following-followers-btn"
+        >
+          {{ isFollowing(user) ? "Unfollow" : "Follow" }}
+        </button>
+        <button class="following-followers-btn">
+          <i class="fas fa-user-friends"></i> Followers Count
+          {{ followerCount }}
+        </button>
+        <button class="following-followers-btn following-btn">
+          <i class="fas fa-user-friends"></i> Following Count
+          {{ followingCount }}
+        </button>
+
+        <div class="user-info-contaienr">
+          <i class="fas fa-envelope icon"></i>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+      <!-- <app-footer></app-footer> -->
+    </div>
+    <div class="User-recipes-container">
+      <!-- <div class="user-recipes-title"><h2>Your Ricepes</h2></div> -->
+      <div *ngFor="let recipe of postedRecipes" class="recipes-small-container">
+        <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}"  >
+        <h3>{{ recipe.title }}</h3>
+        <div class="recipe-title-bg"></div>
+        <div class="recipe-effect"></div>
+      </div>
+    </div>
+  </div>
 </div>
-<app-footer></app-footer>
