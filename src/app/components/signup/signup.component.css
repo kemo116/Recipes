@@ -11,6 +11,9 @@ app-root {
 h2{
     color:bisque
 }
+.error-message{
+    color:white
+}
 .signup-container {
     text-align: center;
     /*background-image: url("E:/Task/src/assets/1324977 (1).jpeg"); /* Update with your image path */

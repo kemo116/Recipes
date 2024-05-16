@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
   isSignedIn=false;
+  errorMessage: string = ''; 
+
   constructor(public firebaseService:FirebaseService,public router: Router){}
   navigateToLogin() {
     console.log("Navigating to login");
@@ -23,11 +25,21 @@ export class SignupComponent {
     
 
   }
-  async onSignup( email:string,password:string){
-    await this.firebaseService.signup(email,password)
-    if(this.firebaseService.isLoggedIn)
-    this.isSignedIn=true
-    
+  async onSignup(email: string, password: string) {
+    // Client-side validation
+    if (!email || !password) {
+      this.errorMessage = 'Please enter both email and password.';
+      return; // Prevent further execution if fields are empty
+    }
+
+    try {
+      await this.firebaseService.signup(email, password);
+      if (this.firebaseService.isLoggedIn)
+        this.isSignedIn = true;
+    } catch (error) {
+      console.error('Error signing up:', error);
+      this.errorMessage = 'Failed to sign up. Please try again later.';
+    }
   }
   async onSignin( email:string,password:string){
     await this.firebaseService.signup(email,password)

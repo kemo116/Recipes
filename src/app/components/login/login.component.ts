@@ -9,6 +9,7 @@ import { FirebaseService } from '../../services/firebase.service';
 })
 export class LoginComponent {
   isSignedIn=false;
+  errorMessage: string = '';
   constructor(public firebaseService:FirebaseService,public router: Router){}
   navigateToSignUp() {
     console.log("Navigating to SignUp");
@@ -24,11 +25,21 @@ export class LoginComponent {
 
   }
  
-  async onSignin( email:string,password:string){
-    await this.firebaseService.signin(email,password)
-    if(this.firebaseService.isLoggedIn)
-    this.isSignedIn=true
-    
+  async onSignin(email: string, password: string) {
+    // Client-side validation
+    if (!email || !password) {
+      this.errorMessage = 'Please enter both email and password.';
+      return; // Prevent further execution if fields are empty
+    }
+
+    try {
+      await this.firebaseService.signin(email, password);
+      if (this.firebaseService.isLoggedIn)
+        this.isSignedIn = true;
+    } catch (error) {
+      console.error('Error signing in:', error);
+      this.errorMessage = 'Failed to sign in. Please check your credentials and try again.';
+    }
   }
   handlelogout(){
     this.isSignedIn=false
