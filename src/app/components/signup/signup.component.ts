@@ -26,10 +26,10 @@ export class SignupComponent {
 
   }
   async onSignup(email: string, password: string) {
-    // Client-side validation
+    
     if (!email || !password) {
       this.errorMessage = 'Please enter both email and password.';
-      return; // Prevent further execution if fields are empty
+      return; 
     }
 
     try {

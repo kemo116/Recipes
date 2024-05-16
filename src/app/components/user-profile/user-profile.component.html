@@ -21,8 +21,8 @@
     </div>
     <div class="User-recipes-container">
       <!-- <div class="user-recipes-title"><h2>Your Ricepes</h2></div> -->
-      <div *ngFor="let recipe of referencedRecipes$ | async" class="recipes-small-container">
-        <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}">
+      <div *ngFor="let recipe of referencedRecipes$ | async" class="recipes-small-container" (click)="showDetails(recipe)">
+        <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}"  >
         <h3>{{ recipe.title }}</h3>
         <div class="recipe-title-bg"></div>
         <div class="recipe-effect"></div>

@@ -6,7 +6,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseService } from '../../services/firebase.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData } from 'rxfire/firestore';
 import { ProfileUser } from '../../models/profile-user';
@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
   followers$!: Observable<any[]> ;
   followings$!: Observable<any[]>;
   userId: string | undefined;
-  constructor(private userService: UserService,private dialog: MatDialog,private firebaseService: FirebaseService) { }
+  constructor(private recipeService: RecipeService,private router:Router,private userService: UserService,private dialog: MatDialog,private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
     this.firebaseService.currentUser$.subscribe(user => {
@@ -85,7 +85,27 @@ export class UserProfileComponent implements OnInit {
   }
   
   
-  
+  showDetails(recipe: any): void {
+    if (!recipe.title) {
+        console.error("No title found for the recipe:", recipe);
+        return;
+    }
+
+    
+    this.recipeService.getRecipeByTitle(recipe.title).subscribe(
+        (foundRecipes) => {
+            if (foundRecipes.length > 0) {
+                const foundRecipe = foundRecipes[0]; 
+                this.router.navigate(['/recipe', foundRecipe.id]);
+            } else {
+                console.error("No recipe found with title:", recipe.title);
+            }
+        },
+        (error) => {
+            console.error("Error fetching recipe by title:", error);
+        }
+    );
+}
   
   
   
