@@ -31,7 +31,7 @@
         <h1>{{ user.username }}</h1>
         <button
           (click)="toggleFollowUser(user)"
-          class="following-followers-btn"
+          class="FOLLOW"
         >
           {{ isFollowing(user) ? "Unfollow" : "Follow" }}
         </button>
@@ -53,7 +53,7 @@
     </div>
     <div class="User-recipes-container">
       <!-- <div class="user-recipes-title"><h2>Your Ricepes</h2></div> -->
-      <div *ngFor="let recipe of postedRecipes" class="recipes-small-container">
+      <div *ngFor="let recipe of postedRecipes" class="recipes-small-container" (click)="showDetails(recipe)">
         <img [src]="recipe.imageUrl" class="card-img-top" alt="Image of {{ recipe.title }}"  >
         <h3>{{ recipe.title }}</h3>
         <div class="recipe-title-bg"></div>

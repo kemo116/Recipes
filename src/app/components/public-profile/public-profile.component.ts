@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ProfileUser } from '../../models/profile-user';
 import { FirebaseService } from '../../services/firebase.service';
@@ -19,7 +19,7 @@ export class PublicProfileComponent implements OnInit {
   followingCount: number = 0;
   showMenu: boolean = true;
   
-  constructor(private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService, private recipeService: RecipeService) { }
+  constructor(private router:Router,private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -91,6 +91,27 @@ export class PublicProfileComponent implements OnInit {
           console.error('Error updating users', err);
         }
       });
+}
+showDetails(recipe: any): void {
+  if (!recipe.title) {
+      console.error("No title found for the recipe:", recipe);
+      return;
+  }
+
+  
+  this.recipeService.getRecipeByTitle(recipe.title).subscribe(
+      (foundRecipes) => {
+          if (foundRecipes.length > 0) {
+              const foundRecipe = foundRecipes[0]; 
+              this.router.navigate(['/recipe', foundRecipe.id]);
+          } else {
+              console.error("No recipe found with title:", recipe.title);
+          }
+      },
+      (error) => {
+          console.error("Error fetching recipe by title:", error);
+      }
+  );
 }
 
 }

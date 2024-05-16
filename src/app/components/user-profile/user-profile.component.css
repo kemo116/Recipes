@@ -26,6 +26,8 @@
 }
 
 .two-divs-container {
+  position: absolute;
+  top: 11.5%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -132,6 +134,7 @@
   position: relative;
   width: 22%;
   height: 33.33%;
+  cursor: pointer;
   box-sizing: border-box;
   /* background-color: #1328e0; */
   border-radius: 10px;
@@ -145,7 +148,7 @@
   position: absolute;
   z-index: 1000;
   left: 5%;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   bottom: -6%;
   color: #ffffff;
