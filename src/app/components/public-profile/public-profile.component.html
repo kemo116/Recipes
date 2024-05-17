@@ -35,13 +35,11 @@
         >
           {{ isFollowing(user) ? "Unfollow" : "Follow" }}
         </button>
-        <button class="following-followers-btn">
-          <i class="fas fa-user-friends"></i> Followers Count
-          {{ followerCount }}
+        <button class="following-followers-btn" (click)="showFollowers()" [disabled]="!user">
+          <i class="fas fa-user-friends"></i> Followers Count {{ followerCount }}
         </button>
-        <button class="following-followers-btn following-btn">
-          <i class="fas fa-user-friends"></i> Following Count
-          {{ followingCount }}
+        <button class="following-followers-btn following-btn" (click)="showFollowing()" [disabled]="!user">
+          <i class="fas fa-user-friends"></i> Following Count {{ followingCount }}
         </button>
 
         <div class="user-info-contaienr">

@@ -4,8 +4,10 @@ import { UserService } from '../../services/user.service';
 import { ProfileUser } from '../../models/profile-user';
 import { FirebaseService } from '../../services/firebase.service';
 import { Recipe } from '../../models/recipe';
-import { forkJoin, switchMap, take } from 'rxjs';
+import { Observable, forkJoin, switchMap, take } from 'rxjs';
 import { RecipeService } from '../../services/recipe.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FollowersDialogComponent } from '../followers-dialog/followers-dialog.component';
 
 @Component({
   selector: 'app-public-profile',
@@ -16,10 +18,12 @@ export class PublicProfileComponent implements OnInit {
   user: ProfileUser | undefined;
   postedRecipes: Recipe[] = [];
   followerCount: number = 0;
+  followers$!: Observable<any[]> ;
+  followings$!: Observable<any[]>;
   followingCount: number = 0;
   showMenu: boolean = true;
   
-  constructor(private router:Router,private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService, private recipeService: RecipeService) { }
+  constructor(private dialog: MatDialog,private router:Router,private route: ActivatedRoute, private userService: UserService, private firebaseService: FirebaseService, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -112,6 +116,41 @@ showDetails(recipe: any): void {
           console.error("Error fetching recipe by title:", error);
       }
   );
+}
+showFollowers(): void {
+  if (!this.user || !this.user.id) {
+    console.error('User is not loaded yet.');
+    return;
+  }
+
+  this.userService.getUserFollowers(this.user.id).subscribe(followers => {
+    const dialogRef = this.dialog.open(FollowersDialogComponent, {
+      width: '400px',
+      data: { users: followers, isFollowers: true }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  });
+}
+
+showFollowing(): void {
+  if (!this.user || !this.user.id) {
+    console.error('User is not loaded yet.');
+    return;
+  }
+
+  this.userService.getUserFollowings(this.user.id).subscribe(followings => {
+    const dialogRef = this.dialog.open(FollowersDialogComponent, {
+      width: '400px',
+      data: { users: followings, isFollowers: false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  });
 }
 
 }
